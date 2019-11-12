@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Blog</title>
+    <style>
+        tr{
+            margin-top: 25px;
+        }
+        td{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Create New Blog Entry</h1>
+<p>
+    <a href="/"><button>View Blog list</button></a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/addBlog}" th:object="${blog}" method="post">
+    <table>
+        <tr>
+            <td>Blog name:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Blog Entry:</td>
+            <td><textarea  style="height: 400px;width: 600px" th:field="*{content}"></textarea></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Add New Blog Entry" onclick="return confirm('Are You Sure?')"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

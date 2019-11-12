@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Blog</title>
+    <style>
+        tr{
+            margin-top: 25px;
+        }
+        td{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>View Blog Entry</h1>
+<p>
+        <a href="/"><button>View Blog list</button></a>
+</p>
+<form th:object="${blog}" >
+    <table>
+        <tr>
+            <td>Blog name:</td>
+            <td><input readonly type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Blog Entry:</td>
+            <td><textarea readonly style="height: 400px;width: 600px" th:field="*{content}"></textarea></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
