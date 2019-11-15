@@ -11,13 +11,13 @@ public class BlogServiceImpl implements BlogService {
     @Autowired
     private BlogRepository blogRepository;
     @Override
-    public List<Blog> findAll() {
+    public Iterable<Blog> findAll() {
         return blogRepository.findAll();
     }
 
     @Override
     public Blog findbyId(int id) {
-        return blogRepository.findById(id);
+        return blogRepository.findOne(id);
     }
 
     @Override

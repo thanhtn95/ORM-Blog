@@ -1,7 +1,9 @@
 package blog.controller;
 
 import blog.model.Blog;
+import blog.model.Category;
 import blog.service.BlogService;
+import blog.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +18,19 @@ import java.util.List;
 public class BlogController {
     @Autowired
     private BlogService blogService;
+    @Autowired
+    private CategoryService categoryService;
+
+    @ModelAttribute("categories")
+    public Iterable<Category> categories(){
+        return categoryService.findAll();
+    }
 
     @GetMapping("/newBlog")
     public ModelAndView goToNewBlogForm() {
         ModelAndView modelAndView = new ModelAndView("/newBlogForm");
         modelAndView.addObject("blog", new Blog());
+        modelAndView.addObject("categories",categories());
         return modelAndView;
     }
 
@@ -35,7 +45,7 @@ public class BlogController {
 
     @GetMapping("")
     public ModelAndView viewBlogList() {
-        List<Blog> blogs = blogService.findAll();
+        Iterable<Blog> blogs = blogService.findAll();
         ModelAndView modelAndView = new ModelAndView("/blogList");
         modelAndView.addObject("blogs", blogs);
         return modelAndView;
@@ -54,6 +64,7 @@ public class BlogController {
         Blog selectedBlog = blogService.findbyId(id);
         ModelAndView modelAndView = new ModelAndView("/editBlogForm");
         modelAndView.addObject("blog", selectedBlog);
+        modelAndView.addObject("categories",categories());
         return modelAndView;
     }
 

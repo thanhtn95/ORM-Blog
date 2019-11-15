@@ -27,6 +27,11 @@
             <td>Blog Entry:</td>
             <td><textarea readonly style="height: 400px;width: 600px" th:field="*{content}"></textarea></td>
         </tr>
+
+        <tr>
+            <td>Category:</td>
+            <td><input  readonly type="text" th:value="${blog.category.getName()}"></td>
+        </tr>
     </table>
 </form>
 </body>

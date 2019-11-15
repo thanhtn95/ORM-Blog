@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Category</title>
+    <style>
+        tr{
+            margin-top: 25px;
+        }
+        td{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Delete Category Entry</h1>
+<p>
+    <a href="/listCategory"><button>View Category list</button></a>
+</p>
+
+<form  th:object="${category}" >
+    <table>
+        <tr>
+            <td>Category name:</td>
+            <td><input readonly type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Category Description:</td>
+            <td><textarea readonly style="height: 400px;width: 600px" th:field="*{description}"></textarea></td>
+        </tr>
+    </table>
+    <p><a th:href="@{/__${category.getId()}__/doDeleteCate}" onclick="return confirm('Are You Sure?')"><button type="button">Delete Category</button></a></p>
+</form>
+</body>
+</html>

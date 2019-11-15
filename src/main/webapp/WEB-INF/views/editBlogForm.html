@@ -31,6 +31,16 @@
             <td>Blog Entry:</td>
             <td><textarea  style="height: 400px;width: 600px" th:field="*{content}"></textarea></td>
         </tr>
+
+        <tr>
+            <td>Category:</td>
+            <td>
+                <select th:field="*{category}">
+                    <option th:each="c: ${categories}" th:text="${c.getName()}" th:value="${c.getId()}" th:selected="(${c.getId()} == ${blog.category.getId()})">
+                    </option>
+                </select>
+            </td>
+        </tr>
         <tr>
             <td></td>
             <td><input type="submit" value="Update Blog Entry" onclick="return confirm('Are You Sure?')"></td>

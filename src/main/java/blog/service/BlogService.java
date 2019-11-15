@@ -5,7 +5,7 @@ import blog.model.Blog;
 import java.util.List;
 
 public interface BlogService {
-    List<Blog> findAll();
+    Iterable<Blog> findAll();
 
     Blog findbyId(int id);
 

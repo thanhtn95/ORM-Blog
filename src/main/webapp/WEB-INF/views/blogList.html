@@ -5,12 +5,16 @@
     <title>List Of Blogs</title>
 </head>
 <body>
+<p>
+    <a th:href="@{/listCategory}"><button type="button">Go to Category Lists</button></a>
+</p>
 <fieldset style="width: fit-content;height: fit-content">
     <legend><h2 style="color: crimson">List Of Blogs</h2></legend>
     <table border="2">
         <tr>
             <th>ID</th>
             <th>Blog Title</th>
+            <th>Category</th>
             <th></th>
             <th></th>
             <th></th>
@@ -19,6 +23,7 @@
             <tr>
                 <td th:text="${blog.getId()}"></td>
                 <td th:text="${blog.getName()}"></td>
+                <td th:text="${blog.category.getName()}"></td>
                 <td><a th:href="@{/__${blog.getId()}__/view}"><button>View Blog Entry</button></a></td>
                 <td><a th:href="@{/__${blog.getId()}__/edit}"><button>Update Blog Entry</button></a></td>
                 <td><a th:href="@{/__${blog.getId()}__/delete}"><button>Delete Blog Entry</button></a></td>
