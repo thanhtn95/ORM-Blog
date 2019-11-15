@@ -5,9 +5,16 @@
     <title>List Of Blogs</title>
 </head>
 <body>
+<form onchange="this.submit()">
+    Search by blog titile:
+    <input name="s" type="text"/>
+</form><br/>
 <p>
     <a th:href="@{/listCategory}"><button type="button">Go to Category Lists</button></a>
 </p>
+<th:block th:if="${categoryName}">
+    <p th:text="${categoryName}"></p>
+</th:block>
 <fieldset style="width: fit-content;height: fit-content">
     <legend><h2 style="color: crimson">List Of Blogs</h2></legend>
     <table border="2">
@@ -22,7 +29,7 @@
         <th:block th:each="blog: ${blogs}">
             <tr>
                 <td th:text="${blog.getId()}"></td>
-                <td th:text="${blog.getName()}"></td>
+                <td><a th:href="@{/__${blog.getId()}__/view}" th:text="${blog.getName()}"></a></td>
                 <td th:text="${blog.category.getName()}"></td>
                 <td><a th:href="@{/__${blog.getId()}__/view}"><button>View Blog Entry</button></a></td>
                 <td><a th:href="@{/__${blog.getId()}__/edit}"><button>Update Blog Entry</button></a></td>
@@ -30,6 +37,11 @@
             </tr>
         </th:block>
     </table>
+    <div style="margin-top: 15px">
+        <a th:href="@{'/'(page=${blogs.number - 1})}" th:if="${blogs.hasPrevious()}">Previous</a>
+        <span th:text="${blogs.number + 1}"></span>/<span th:text="${blogs.totalPages}"></span>
+        <a th:href="@{'/'(page=${blogs.number + 1})}" th:if="${blogs.hasNext()}">Next</a>
+    </div>
 </fieldset>
 <p><a href="/newBlog"><button type="button">Add New Blog Entry</button></a></p>
 </body>

@@ -1,6 +1,8 @@
 package blog.controller;
 
+import blog.model.Blog;
 import blog.model.Category;
+import blog.service.BlogService;
 import blog.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private BlogService blogService;
     @GetMapping("/listCategory")
     public ModelAndView getCategory(){
         ModelAndView modelAndView = new ModelAndView("/categories/categoryList");
@@ -72,6 +76,16 @@ public class CategoryController {
         categoryService.remove(id);
         ModelAndView modelAndView = new ModelAndView("redirect:/listCategory");
         modelAndView.addObject("message","Deleted A Category :(");
+        return modelAndView;
+    }
+
+    @GetMapping("/{id}/categoryBlogList")
+    public ModelAndView getCategoryBlogList(@PathVariable int id){
+        Category category = categoryService.findById(id);
+        Iterable<Blog> blogs = blogService.findAllByCategory(category);
+        ModelAndView modelAndView = new ModelAndView("/blogList");
+        modelAndView.addObject("blogs",blogs);
+        modelAndView.addObject("categoryName","Category: "+category.getName());
         return modelAndView;
     }
 }

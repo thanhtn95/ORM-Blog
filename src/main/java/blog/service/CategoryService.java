@@ -7,4 +7,5 @@ public interface CategoryService {
     Category findById(int id);
     void save(Category category);
     void remove(int id);
+
 }

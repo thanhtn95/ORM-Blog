@@ -21,7 +21,7 @@
         <th:block th:each="cate: ${categories}">
             <tr>
                 <td th:text="${cate.getId()}"></td>
-                <td th:text="${cate.getName()}"></td>
+                <td><a th:text="${cate.getName()}" th:href="@{/__${cate.getId()}__/categoryBlogList}"></a></td>
                 <td><a th:href="@{/__${cate.getId()}__/viewCate}"><button>View Category Entry</button></a></td>
                 <td><a th:href="@{/__${cate.getId()}__/editCate}"><button>Update Category Entry</button></a></td>
                 <td><a th:href="@{/__${cate.getId()}__/deleteCate}"><button>Delete Category Entry</button></a></td>
@@ -29,6 +29,6 @@
         </th:block>
     </table>
 </fieldset>
-<p><a href="/newCate"><button type="button">Add New Blog Entry</button></a></p>
+<p><a href="/newCate"><button type="button">Add Category Entry</button></a></p>
 </body>
 </html>
