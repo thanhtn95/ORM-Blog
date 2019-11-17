@@ -36,8 +36,8 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Iterable<Blog> findAllByCategory(Category category) {
-        return blogRepository.findAllByCategory(category);
+    public Page<Blog> findAllByCategory(Category category, Pageable pageable) {
+        return blogRepository.findAllByCategory(category,pageable);
     }
 
     @Override

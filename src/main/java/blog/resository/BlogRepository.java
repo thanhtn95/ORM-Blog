@@ -8,7 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface BlogRepository extends PagingAndSortingRepository<Blog,Integer> {
-    Iterable<Blog> findAllByCategory(Category category);
+    Page<Blog> findAllByCategory(Category category, Pageable pageable);
     Page<Blog> findAllByNameContaining(String word,Pageable pageable);
     Page<Blog> findAllByOrderByNameDesc(Pageable pageable);
 }

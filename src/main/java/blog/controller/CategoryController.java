@@ -5,6 +5,8 @@ import blog.model.Category;
 import blog.service.BlogService;
 import blog.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -80,9 +82,9 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}/categoryBlogList")
-    public ModelAndView getCategoryBlogList(@PathVariable int id){
+    public ModelAndView getCategoryBlogList(@PathVariable int id, Pageable pageable){
         Category category = categoryService.findById(id);
-        Iterable<Blog> blogs = blogService.findAllByCategory(category);
+        Page<Blog> blogs = blogService.findAllByCategory(category, pageable);
         ModelAndView modelAndView = new ModelAndView("/blogList");
         modelAndView.addObject("blogs",blogs);
         modelAndView.addObject("categoryName","Category: "+category.getName());

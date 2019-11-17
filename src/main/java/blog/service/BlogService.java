@@ -17,7 +17,7 @@ public interface BlogService {
 
     void delete(int id);
 
-    Iterable<Blog> findAllByCategory(Category category);
+    Page<Blog> findAllByCategory(Category category, Pageable pageable);
     Page<Blog> findAllByTitleContaining(String word, Pageable pageable);
     Page<Blog> findAllByOrderByNameDesc(Pageable pageable);
 }
