@@ -4,6 +4,7 @@ import blog.model.Blog;
 import blog.model.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -18,4 +19,5 @@ public interface BlogService {
 
     Iterable<Blog> findAllByCategory(Category category);
     Page<Blog> findAllByTitleContaining(String word, Pageable pageable);
+    Page<Blog> findAllByOrderByNameDesc(Pageable pageable);
 }

@@ -6,7 +6,9 @@ import blog.service.BlogService;
 import blog.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ public class BlogController {
     private BlogService blogService;
     @Autowired
     private CategoryService categoryService;
+
 
     @ModelAttribute("categories")
     public Iterable<Category> categories(){
@@ -45,12 +48,25 @@ public class BlogController {
     }
 
     @GetMapping("")
-    public ModelAndView viewBlogList(@PageableDefault(size = 2) Pageable pageable, @RequestParam("s") Optional <String> word) {
+    public ModelAndView viewBlogList(@RequestParam("s") Optional <String> word,@PageableDefault(size = 3) Pageable pageable) {
         Page<Blog> blogs;
         if(word.isPresent()){
             blogs= blogService.findAllByTitleContaining(word.get(),pageable);
         }else{
             blogs=blogService.findAll(pageable);
+        }
+        ModelAndView modelAndView = new ModelAndView("/blogList");
+        modelAndView.addObject("blogs", blogs);
+        modelAndView.addObject("sorter","name,desc");
+        return modelAndView;
+    }
+    @GetMapping("/getListSortNameRev")
+    public ModelAndView viewBlogListSortByNameRev(@PageableDefault(size = 3) Pageable pageable, @RequestParam("s") Optional <String> word) {
+        Page<Blog> blogs;
+        if(word.isPresent()){
+            blogs= blogService.findAllByTitleContaining(word.get(),pageable);
+        }else{
+            blogs=blogService.findAllByOrderByNameDesc(pageable);
         }
         ModelAndView modelAndView = new ModelAndView("/blogList");
         modelAndView.addObject("blogs", blogs);

@@ -7,6 +7,7 @@ import blog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -42,5 +43,11 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Page<Blog> findAllByTitleContaining(String word, Pageable pageable) {
         return blogRepository.findAllByNameContaining(word,pageable);
+    }
+
+
+    @Override
+    public Page<Blog> findAllByOrderByNameDesc(Pageable pageable) {
+        return blogRepository.findAllByOrderByNameDesc(pageable);
     }
 }
