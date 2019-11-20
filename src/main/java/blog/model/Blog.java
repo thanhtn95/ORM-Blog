@@ -1,5 +1,7 @@
 package blog.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,7 +12,8 @@ public class Blog {
     private int id;
     private String name;
     private String content;
-    @ManyToOne
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
     public Blog() {

@@ -1,5 +1,7 @@
 package blog.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,8 +13,8 @@ public class Category {
     private int id;
     private String name;
     private String description;
-
-    @OneToMany(targetEntity = Blog.class)
+    @JsonManagedReference
+    @OneToMany(targetEntity = Blog.class ,fetch = FetchType.EAGER)
     private List<Blog> blogs;
 
     public Category() {
